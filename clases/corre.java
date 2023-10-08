@@ -1,14 +1,12 @@
 public class corre {
     public static void main(String[] args){
-        Pila stack = new Pila();
+        Lista expresion = new Lista();
+        Pila operandoStack = new Pila();
+        StringArray operandos = new StringArray(6);
+        StringArray opLogicos = new StringArray(4);
 
-        stack.push("Apple");
-        stack.push("Banana");
-        stack.push("Cherry");
-
-        while (!stack.isEmpty()) {
-            System.out.println("Top element: " + stack.peek());
-            System.out.println("Popped: " + stack.pop());
-        }
+        expresion.insert("(x+(y-z))"); // aqui luego cambio por el input del usuario
+        operandos.insertAll("+", "-", "*", "/", "%", "**");
+        opLogicos.insertAll("and", "or", "not", "xor");
     }
 }

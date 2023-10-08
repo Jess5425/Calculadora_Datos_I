@@ -1,6 +1,7 @@
 public class Lista {
     private Nodo head;
     private Nodo tail;
+    private int longitud;
 
     public Lista() {
         this.head = null;
@@ -33,11 +34,19 @@ public class Lista {
         System.out.println("null");
     }
 
-    public static void main(String[] args) {
-        Lista list = new Lista();
+    public int getSize(){
+        Nodo current = head;
+        while (current != null) {
+            longitud++;
+            current = current.next;
+        }
+        return longitud;
+    }
 
-        list.insert("(x+(y-z))");
-
-        list.display();
+    public Nodo getFirst(){
+        return head;
+    }
+    public Nodo getLast(){
+        return tail;
     }
 }

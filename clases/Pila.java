@@ -1,14 +1,13 @@
-class Pila {
+public class Pila {
     private Nodo top;
 
     public Pila() {
         this.top = null;
     }
 
-    public void push(String data) {
-        Nodo newNode = new Nodo(data);
-        newNode.next = top;
-        top = newNode;
+    public void push(Nodo data) {
+        (data).next = top;
+        top = (data);
     }
 
     public String pop() {
