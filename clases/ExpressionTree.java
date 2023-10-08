@@ -2,7 +2,9 @@ import java.lang.reflect.Array;
 import java.util.Objects;
 
 public class ExpressionTree {
-    Nodo root;
+    NodoArbol root;
+    NodoArbol left;
+    NodoArbol right;
 
     public StringArray operandos;
     public StringArray opLogicos;
@@ -10,22 +12,23 @@ public class ExpressionTree {
     Pila operandoStack;
 
 
-    public ExpressionTree(Nodo a){
+    public ExpressionTree(NodoArbol a){
         this.root=a;
+        this.left=null;
+        this.right=null;
     }
 
-    private void creaArbol(){
-        Nodo current = expresion.getFirst();
+    private void creaArbol(Lista list){ //Método principal que toma una lista, evalúa cada nodo.
+        Nodo current = list.getFirst();
         while (current!=null){
-
-
+            revisaCaracter(current);
             current=current.next;
         }
 
 
     }
 
-    private Boolean isOperator(StringArray conjunto, Nodo c){
+    private Boolean isOperator(StringArray conjunto, Nodo c){ //Método que revisa si es operator
         for (int i = 0; i < conjunto.getSize(); i++) {
             if (conjunto.get(i).equals(c.data)){
                 return true;
@@ -33,10 +36,10 @@ public class ExpressionTree {
         }
         return false;
     }
-    private void revisaCaracter(Nodo c){
+    private void revisaCaracter(Nodo c){ //Método que si pertenece a operandos, llame a operandoHandler (crea subarbol)
 
         if (isOperator(operandos, c)){
-            System.out.println("Aqui va el metodo para operandos");
+            operandoHandler(c.data);
         }
 
         if (isOperator(opLogicos, c)){
@@ -47,7 +50,17 @@ public class ExpressionTree {
 
     }
 
-    private Nodo procesarParentesis(Nodo current) {
+    private NodoArbol operandoHandler(String op){ // Método que crea un nuevo nodoArbol con dato operador, con referencias left y right a sus operandos
+        NodoArbol temp = new NodoArbol();
+        temp.data=op;
+        this.root= temp;
+//        this.right=operandoStack.pop();
+//        this.left=operandoStack.pop();
+
+        return temp; //quiero que temp vuelva a la lista como nodo
+    }
+
+    private Nodo procesarParentesis(Nodo current) { // divide la lista en el parentesis más pequeño posible
         Nodo start = current;
         Nodo end = null;
         int count = 0; //cuando encuentra ( count++, cuando encuentra ) count--, cuando count es 0 encontró la expresión más pequeña
@@ -99,6 +112,3 @@ public class ExpressionTree {
     }
 
 }
-
-
-

@@ -5,9 +5,10 @@ public class Pila {
         this.top = null;
     }
 
-    public void push(Nodo data) {
-        (data).next = top;
-        top = (data);
+    public void push(String data) {
+        Nodo newNode = new Nodo(data);
+        newNode.next = top;
+        top = newNode;
     }
 
     public String pop() {
@@ -32,3 +33,4 @@ public class Pila {
         return top == null;
     }
 }
+
