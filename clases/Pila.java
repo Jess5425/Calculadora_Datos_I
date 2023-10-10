@@ -1,32 +1,32 @@
 public class Pila {
-    private Nodo top;
+    private NodoArbol top;
 
     public Pila() {
         this.top = null;
     }
 
-    public void push(String data) {
-        Nodo newNode = new Nodo(data);
-        newNode.next = top;
-        top = newNode;
+    public void push(NodoArbol nodo) {
+        nodo.next = top;
+        top = nodo;
     }
 
-    public String pop() {
+    public NodoArbol pop() {
         if (isEmpty()) {
             throw new IllegalStateException("Pila vacía, no insista >:(");
         }
 
-        String data = top.data;
+        NodoArbol nodo = top;
         top = top.next;
-        return data;
+        nodo.next = null; // Detach the node from the stack
+        return nodo;
     }
 
-    public String peek() {
+    public NodoArbol peek() {
         if (isEmpty()) {
             throw new IllegalStateException("Pila vacía, no insista >:(");
         }
 
-        return top.data;
+        return top;
     }
 
     public boolean isEmpty() {

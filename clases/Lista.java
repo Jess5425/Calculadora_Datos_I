@@ -1,6 +1,6 @@
 public class Lista {
-    private Nodo head;
-    private Nodo tail;
+    private NodoArbol head;
+    private NodoArbol tail;
     private int longitud;
 
     public Lista() {
@@ -14,19 +14,20 @@ public class Lista {
 
     public void insert(String data) {
         for (int i = 0; i < data.length(); i++) {
-            Nodo newNode = new Nodo(String.valueOf(data.charAt(i)));
+            NodoArbol newNode = new NodoArbol();
+            newNode.data=String.valueOf(data.charAt(i));
             if (tail == null) {
                 head = newNode;
-                tail = newNode;
             } else {
                 tail.next = newNode;
-                tail = newNode;
+                newNode.left = tail; // Set the previous tail as the left child of the new node
             }
+            tail = newNode;
         }
     }
 
     public void display() {
-        Nodo current = head;
+        NodoArbol current = head;
         while (current != null) {
             System.out.print(current.data + " , ");
             current = current.next;
@@ -35,7 +36,7 @@ public class Lista {
     }
 
     public int getSize(){
-        Nodo current = head;
+        NodoArbol current = head;
         while (current != null) {
             longitud++;
             current = current.next;
@@ -43,10 +44,10 @@ public class Lista {
         return longitud;
     }
 
-    public Nodo getFirst(){
+    public NodoArbol getFirst(){
         return head;
     }
-    public Nodo getLast(){
+    public NodoArbol getLast(){
         return tail;
     }
 }
