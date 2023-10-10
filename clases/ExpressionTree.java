@@ -36,7 +36,7 @@ public class ExpressionTree {
     private void revisaCaracter(NodoArbol c){ //Método que si pertenece a operandos, llame a operandoHandler (crea subarbol)
 
         if (isOperator(operandos, c)){
-            operandoHandler(c.data);
+            operandoHandler(c);
         }
 
         if (isOperator(opLogicos, c)){
@@ -47,11 +47,9 @@ public class ExpressionTree {
 
     }
 
-    private void operandoHandler(String op){ // Método que crea un nuevo nodoArbol con dato operador, con referencias left y right a sus operandos
-        NodoArbol temp = new NodoArbol();
-        temp.data=op;
-        this.root= temp;
-        this.right=operandoStack.pop();
+    private void operandoHandler(NodoArbol op){ // Método que crea un nuevo nodoArbol con dato operador, con referencias left y right a sus operandos
+        op.left=operandoStack.pop();
+        op.right=operandoStack.pop();
 
     }
 
